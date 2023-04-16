@@ -2,10 +2,14 @@
 # Modul 9: Tugas Besar
 
 ### Contributors
-Cantumkan nama kelompok dan anggota kelompok Anda di bagian ini.
+**Kelompok B5**
+Nafa Lutfia Atihrah Chandra (13221031)
+Fathiya Amani Shabira (13221032)
+Crysanta Caressa (13221033)
+Petrus Nicolas Manurung (13221034)
 
 ### Deskripsi
-Jelaskan program Anda secara singkat di bagian ini.
+Program Traveling Salesman Problem yang dibuat merupakan program yang dapat membaca file yang berisi daftar pelabuhan-pelabuhan yang perlu dikunjungi oleh sebuah kapal kargo dan menentukan rute paling pendek yang mengunjungi semua pelabuhan tersebut sebanyak satu kali, lalu kembali lagi ke pelabuhan awal dimana kapal tersebut berangkat. Program ini juga akan menampilkan total jarak dari rute pelayaran serta memberikan keterangan pelabuhan mana saja yang tidak dapat dikunjungi karena memiliki jarak yang terlalu jauh dengan pelabuhan lainnya.
 
 ### Kompilasi
 Program dapat dikompilasi dengan perintah berikut:
