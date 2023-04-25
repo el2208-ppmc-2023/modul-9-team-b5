@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <limits.h>
 
 #define maxline 255
 #define maxpelabuhan 20
@@ -29,12 +30,12 @@ int visited_harbor[maxpelabuhan];
 int jarak = 0;
 
 //fungsi-fungsi
-int tsp(int h);
+void tsp(int h);
 int hitungJarak(struct Pelabuhan pelabuhan1, struct Pelabuhan pelabuhan2);
 double convert_RadiantoDegree(double radian);
 void filetoArray(struct Pelabuhan array[maxpelabuhan]);
 void arraytoMatrix(struct Pelabuhan array[maxpelabuhan], int matrix[maxpelabuhan][maxpelabuhan]);
-void minimum_cost(int harbor);
+int find_next_h(int h);
 
 
 
@@ -47,7 +48,7 @@ int main()
     arraytoMatrix(pelabuhan, jrk_pelabuhan);
 
     printf("\n\nRute Pelayaran Optimal:\n");
-    minimum_cost(0);
+    tsp(0);
     printf("\n\nJarak Total Rute Pelayaran: ");
     printf("%d km\n", jarak);
 
@@ -106,34 +107,41 @@ double convert_RadiantoDegree(double radian){
         return radian*(3.14/180);
     }
 
-int tsp(int h){
-    int count, nearest_harbor = 9999;
-    int minimum = 9999, temp;
-    for(count = 0; count < maxpelabuhan; count++){
-        if((jrk_pelabuhan[h][count] != 0)&&(visited_harbor[count] == 0)){
-            if(jrk_pelabuhan[h][count] < minimum){
-                minimum = jrk_pelabuhan[count][0] + jrk_pelabuhan[h][count];
-            }
-            temp = jrk_pelabuhan[h][count];
-            nearest_harbor = count;
-        }
-    }
-    if(minimum!= 9999){
-        jarak += temp;
-    }
-    return nearest_harbor;
-}
+void tsp(int h){
+    int next_h;
+    visited_harbor[h] = 1;
+    printf("%s ->", pelabuhan[h].nama);
 
-void minimum_cost(int harbor){
-    int nearest_harbor;
-    visited_harbor[harbor] = 1;
-   printf("%s -> ", pelabuhan[harbor].nama);
-    nearest_harbor = tsp(harbor);
-    if(nearest_harbor == 9999){
-        nearest_harbor = 0;
-        printf("%s", pelabuhan[nearest_harbor].nama);
-        jarak = jarak + jrk_pelabuhan[harbor][nearest_harbor];
+    next_h = find_next_h(h);
+
+    if(next_h == INT_MAX){
+        int v = 0;
+        jarak += jrk_pelabuhan[next_h][v];
+        printf("%s", pelabuhan[v].nama);
         return;
     }
-    minimum_cost(nearest_harbor);
+
+    tsp(next_h);
+    
 }
+
+int find_next_h(int h){
+    int nh, min = INT_MAX, min_index, temp_jrk=0;
+
+    for(int i=0; i< maxpelabuhan; i++){
+        if(visited_harbor[i] == 0 && jrk_pelabuhan[h][i] != 0 && jrk_pelabuhan[h][i] < min){
+            temp_jrk = jrk_pelabuhan[h][i];
+            min = jrk_pelabuhan[h][i];
+            min_index = i;
+        }
+    }
+    if (min == INT_MAX){
+        return min;
+    }
+    else{
+        nh = min_index;
+        jarak += temp_jrk;
+        return nh;
+    }
+}
+
