@@ -79,10 +79,13 @@ int main()
 void filetoArray(struct Pelabuhan array[maxpelabuhan]){
     FILE *fp;
     char line[maxline];
+    char namafile[100];
     char *token;
     int count = 0;
 
-    fp = fopen("pelabuhan.csv", "r");
+    printf("Masukkan nama file: ");
+    scanf("%s", namafile);
+    fp = fopen(namafile, "r");
     if (fp == NULL)
     {
         printf("Tidak ada file.");
