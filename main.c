@@ -43,6 +43,7 @@ int harbor_num[maxpelabuhan];
 int harbor_total = -1; 
 //-> variabel yang jumlah elemen dari array harbor_num atau menunjukkan jumlah pelabuhan yang dilewati
 
+
 // DEFINISI FUNGSI
 void filetoArray(struct Pelabuhan array[maxpelabuhan]);
 //-> Fungsi untuk menerima masukan file dan memasukkan isinya ke dalam array
@@ -61,7 +62,7 @@ int find_next_h(int h);
 void skipped_harbor();
 //-> Fungsi untuk mencetak pelabuhan yang tidak dilewati
 
-
+// FUNGSI MAIN PROGRAM
 int main()
 {
     filetoArray(pelabuhan);
@@ -88,11 +89,20 @@ void filetoArray(struct Pelabuhan array[maxpelabuhan]){
     printf("Masukkan nama file: ");
     scanf("%s", namafile);
     fp = fopen(namafile, "r");
+    // Jika file tidak ada
     if (fp == NULL)
     {
-        printf("Tidak ada file.");
+        printf("\nTidak ada file.");
         exit(0);
     }
+    
+    // Jika file kosong
+    int c = fgetc(fp);
+    if (c == EOF){
+        printf("\nFile kosong.");
+        exit(0);
+    }
+    ungetc(c,fp);
 
     // Membaca isi file dan memasukkan isi file ke dalam array
     fgets(line, maxline,fp);
