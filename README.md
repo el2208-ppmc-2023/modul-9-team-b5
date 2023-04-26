@@ -34,4 +34,4 @@ main.exe
 ```
 
 ### Panduan Penggunaan
-Jelaskan cara pengguna dapat menggunakan program Anda di bagian ini.
+Pengguna dapat berinteraksi dengan program dengan memasukkan input nama file. Selanjutnya, output dari program dapat dilihat berupa matriks jarak pelabuhan, rute pelayaran optimal, jarak dari rute pelayaran tersebut, dan kota yang tidak dilewati oleh rute pelayaran.
